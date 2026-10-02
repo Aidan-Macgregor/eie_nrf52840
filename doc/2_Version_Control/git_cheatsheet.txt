@@ -1,0 +1,393 @@
+GIT CHEATSHEET
+
+Git is a version control system. It keeps track of changes to files so
+that you can save versions of your work, create different branches, and
+share your work using GitHub.
+
+⸻
+
+CHECKING THE REPOSITORY
+
+git status
+
+Shows the current status of the Git repository.
+
+It tells you:
+
+* Which branch you are currently on.
+* Which files have been changed.
+* Which files are untracked.
+* Which files have been staged and are ready to commit.
+
+Example:
+
+git status
+
+git log
+
+Shows the history of commits in the repository.
+
+Each commit contains information such as:
+
+* The commit ID.
+* The person who made the commit.
+* The date.
+* The commit message.
+
+The newest commit is normally shown at the top.
+
+Example:
+
+git log
+
+If Git shows a colon at the bottom of the terminal and you cannot type
+commands, press q to return to the normal terminal.
+
+git remote -v
+
+Shows the remote repositories connected to your local repository.
+
+A remote is another copy of the repository, usually stored online.
+
+In this project:
+
+* origin = your personal GitHub fork.
+* upstream = the EiE project’s GitHub repository.
+
+Example:
+
+git remote -v
+
+⸻
+
+BRANCHES
+
+git branch
+
+Lists all of the branches in your local repository.
+
+The * shows which branch you are currently using.
+
+Example:
+
+git branch
+
+Possible output:
+
+* lesson2
+    main
+
+This means you are currently working on the lesson2 branch.
+
+git branch 
+
+Creates a new branch with the specified name.
+
+It creates the branch but does NOT switch you to it.
+
+Example:
+
+git branch lesson2
+
+This creates a branch called lesson2.
+
+Important:
+“git branch” and “git branch ” do different things.
+
+With no argument:
+git branch
+
+lists branches.
+
+With a branch name:
+git branch lesson2
+
+creates a new branch.
+
+git checkout 
+
+Switches from your current branch to another existing branch.
+
+Example:
+
+git checkout main
+
+This switches to the main branch.
+
+Example:
+
+git checkout lesson2
+
+This switches to the lesson2 branch.
+
+git checkout -b 
+
+Creates a new branch AND immediately switches to it.
+
+Example:
+
+git checkout -b lesson2
+
+This is essentially a shortcut for:
+
+git branch lesson2
+git checkout lesson2
+
+⸻
+
+STAGING AND COMMITS
+
+git add 
+
+Adds a file to the staging area.
+
+The staging area is where you choose which changes will be included
+in your next commit.
+
+Example:
+
+git add doc/2_Version_Control/git_cheatsheet.txt
+
+After using git add, the file is staged and ready to be committed.
+
+You can check this using:
+
+git status
+
+git commit
+
+Creates a commit using the changes currently in the staging area.
+
+A commit is like a saved snapshot of your project.
+
+If you run git commit without additional arguments, Git opens a text
+editor where you can enter a commit message.
+
+Example:
+
+git commit
+
+git commit -m ‘’
+
+Creates a commit and gives it a commit message directly in the command.
+
+The -m means “message.”
+
+Example:
+
+git commit -m ‘Add Git Cheatsheet’
+
+The text inside the quotes describes what was changed in the commit.
+
+⸻
+
+GETTING CHANGES FROM GIT
+
+git fetch
+
+Downloads information about new commits and branches from a remote
+repository.
+
+It does NOT automatically change the files in your current branch.
+
+Example:
+
+git fetch upstream
+
+git fetch  
+
+Fetches a specific branch from a specific remote repository.
+
+Example:
+
+git fetch upstream main
+
+This gets information about the main branch from the upstream EiE
+repository.
+
+git pull
+
+Gets changes from a remote repository and integrates them into your
+current branch.
+
+Example:
+
+git pull
+
+This normally pulls from the remote branch that your current branch
+is configured to track.
+
+git pull  
+
+Gets the specified branch from the specified remote and integrates
+the changes into your current branch.
+
+Example:
+
+git pull upstream main
+
+This gets the main branch from the upstream EiE repository and
+integrates those changes into your current branch.
+
+⸻
+
+SENDING CHANGES TO GITHUB
+
+git push
+
+Uploads your local commits to the remote repository.
+
+Example:
+
+git push
+
+This is normally used after your branch has already been connected
+to a remote branch.
+
+git push  
+
+Uploads a specific local branch to a specific remote repository.
+
+Example:
+
+git push origin main
+
+This pushes your local main branch to your GitHub fork, which is
+called origin.
+
+git push -u  
+
+Uploads a branch to a remote repository and sets up a connection
+between the local branch and the remote branch.
+
+The -u means to set the upstream tracking branch.
+
+Example:
+
+git push -u origin lesson2
+
+The first time you push a new branch, this creates the lesson2
+branch on your GitHub fork and connects your local lesson2 branch
+to it.
+
+After this has been done, you can normally just use:
+
+git push
+
+⸻
+
+MERGING AND REBASING
+
+git merge 
+
+Combines the changes from another branch into the branch you are
+currently on.
+
+Example:
+
+git checkout main
+git merge lesson2
+
+This switches to main and then combines the changes from lesson2
+into main.
+
+git rebase 
+
+Moves the commits on your current branch so that they are based on
+another branch.
+
+Example:
+
+git rebase main
+
+This takes the commits on your current branch and replays them on
+top of the current main branch.
+
+Rebase and merge are both ways of combining changes, but they do it
+differently. Rebase changes the commit history, while merge creates
+a merge relationship between the branches.
+
+⸻
+
+COMMON REMOTE NAMES
+
+origin
+
+Usually refers to your personal fork of the repository.
+
+For this project:
+
+git@github.com:Aidan-Macgregor/eie_nrf52840.git
+
+upstream
+
+Refers to the original EiE repository.
+
+For this project:
+
+https://github.com/eiefirmware/eie_nrf52840.git
+
+⸻
+
+BASIC WORKFLOW
+
+A common Git workflow is:
+
+1. Check your branch:
+
+git branch
+
+2. Check what has changed:
+
+git status
+
+3. Stage your changes:
+
+git add 
+
+4. Create a commit:
+
+git commit -m ‘Describe the change’
+
+5. Push the commit to GitHub:
+
+git push
+
+⸻
+
+KEY IDEA
+
+Git tracks changes locally on your computer.
+
+git add
+Selects changes for the next commit.
+
+git commit
+Saves those staged changes as a version in your local Git history.
+
+git push
+Uploads your commits to GitHub.
+
+git fetch
+Downloads information about changes from a remote without merging them.
+
+git pull
+Downloads changes and integrates them into your current branch.
+
+git branch
+Lists branches or creates a branch when given a branch name.
+
+git checkout
+Switches between branches.
+
+git merge
+Combines another branch into the current branch.
+
+git rebase
+Replays commits on top of another branch.
+
+git status
+Shows what is currently happening in your repository.
+
+git log
+Shows the history of commits.
